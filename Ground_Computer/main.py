@@ -7,9 +7,9 @@ root.geometry("300x300")
 root.configure(bg="#233342")
 
 
-class initialize_connection:
-    def __init__(self, num):
-        pass
+def initialize_connection():
+    connectionButton.configure(state="disabled")
+    flight_control_screen()
 
 
 connectionButton = Button(
@@ -17,7 +17,17 @@ connectionButton = Button(
     text="Initialize Connection",
     fg="white",
     bg="#B35340",
+    command=initialize_connection,
 )
 connectionButton.pack(pady=100)
+
+
+class flight_control_screen:
+    def __init__(self):
+        top = Toplevel()
+        # app.geometry("1100x630+30+30")
+        top.minsize(1100, 680)
+        top.maxsize(1100, 680)
+
 
 root.mainloop()
