@@ -1,0 +1,2 @@
+USERNAME = "pi@192.168.1.11"
+PASSWORD = "P962qdjhAymHFZgy"
