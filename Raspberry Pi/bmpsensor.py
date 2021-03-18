@@ -4,20 +4,19 @@ import adafruit_bmp3xx
 
 
 class bmp:
-    transmit = False
-    p0 = 0
     def __init__(self):
 
         #I2C setup
         self.i2c = busio.I2C(board.SCL, board.SDA)
-        self.bmp = adafruit_bmp3xx.BMP3XX_I2C(i2c)
+        self.bmp = adafruit_bmp3xx.BMP3XX_I2C(self.i2c)
         self.bmp.pressure_oversampling = 8
         self.bmp.temperature_oversampling = 2
+        self.p0 = 0
         
 
     @classmethod
-    def transmit_data(self)
-        transmit = True
+    def transmit_data(self):
+        self.transmit = True
         while transmit:
             """print(
                 "Pressure: {:6.4f}  Temperature: {:5.2f}".format(bmp.pressure, bmp.temperature)
@@ -27,11 +26,11 @@ class bmp:
             
     @staticmethod
     def stop(self):
-        transmit = False
+        self.transmit = False
 
     @staticmethod
     def hypersometric(self, P, T):
-        return (((p0/P)^(1/5.257)) - 1) * (T+273.15)/ 0.0065
+        return (((self.p0/P)**(1/5.257)) - 1) * (T+273.15)/ 0.0065
 
 
 
