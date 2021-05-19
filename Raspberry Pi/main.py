@@ -10,6 +10,7 @@ class Main:
         self.camera = cam()
         self.testingSequence()
         # self.sensor.matrixGreen()  # send radio message that valid data has been established
+        self.mainSequence()
 
     def testingSequence(self):
         while not (flag):
