@@ -1,6 +1,6 @@
 import json, struct, threading
 from sensor_information import SensorInformation
-from sense_hat import SenseHat
+import time
 
 
 class Main:
