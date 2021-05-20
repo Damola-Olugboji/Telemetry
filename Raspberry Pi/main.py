@@ -43,5 +43,13 @@ class Main:
                 f.write(json.dumps(sensor_dict))
 
 
+def testprint(self):
+    self.sensor = SensorInformation()
+    while True:
+        sensor_dict = self.sensor.sensorAggregate()
+        print(json.dumps(sensor_dict))
+        time.sleep(0.1)
+
+
 if __name__ == "__main__":
-    main = Main()
+    testprint()
