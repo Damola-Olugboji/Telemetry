@@ -25,11 +25,11 @@ class SensorInformation:
             ept = getattr(report, "ept", "nan")
             speed = getattr(report, "speed", "nan")
 
-        humidity = self.sense.humidity
-        temp = self.sense.temp
-        pressure = self.sense.pressure
-        accel = self.sense.accel
-        accel_raw = self.sense.accel_raw
+        humidity = self.sense.get_humidity()
+        temp = self.sense.get_temperature()
+        pressure = self.sense.get_pressure()
+        accel = self.sense.get_accelerometer()
+        accel_raw = self.sense.get_accelerometer_raw()
         orientation = self.sense.get_orientation_degrees()
 
         sensorDict = {
