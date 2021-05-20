@@ -43,7 +43,7 @@ class Main:
                 f.write(json.dumps(sensor_dict))
 
 
-def testprint(self):
+def testprint():
     self.sensor = SensorInformation()
     while True:
         sensor_dict = self.sensor.sensorAggregate()
