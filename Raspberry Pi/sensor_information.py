@@ -4,19 +4,17 @@ from sense_hat import SenseHat
 
 
 class SensorInformation:
-    self.sense = SenseHat()
-
     def __init__(self):
-
+        self.sense = SenseHat()
         self.sense.set_imu_config(False, True, True)
         self.green = [0, 255, 0]
         self.red = [255, 0, 0]
 
     @classmethod
     def sensorAggregate(self):
-
         gpsd = gps(mode=WATCH_ENABLE | WATCH_NEWSTYLE)
         report = gpsd.next()
+        lat, lon, time, alt, epv, ept, speed = 0, 0, 0, 0, 0, 0, 0
         if report["class"] == "TPV":
             lat = getattr(report, "lat", 0.0)
             lon = getattr(report, "lon", 0.0)
