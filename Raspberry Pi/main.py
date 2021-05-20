@@ -44,9 +44,9 @@ class Main:
 
 
 def testprint():
-    self.sensor = SensorInformation()
+    sensor = SensorInformation()
     while True:
-        sensor_dict = self.sensor.sensorAggregate()
+        sensor_dict = sensor.sensorAggregate()
         print(json.dumps(sensor_dict))
         time.sleep(0.1)
 
