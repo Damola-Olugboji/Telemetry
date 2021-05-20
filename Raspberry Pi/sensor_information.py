@@ -10,7 +10,6 @@ class SensorInformation:
         self.green = [0, 255, 0]
         self.red = [255, 0, 0]
 
-    @classmethod
     def sensorAggregate(self):
 
         gpsd = gps(mode=WATCH_ENABLE | WATCH_NEWSTYLE)
