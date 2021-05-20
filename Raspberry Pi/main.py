@@ -1,4 +1,4 @@
-from sensor_information import SensorInformation
+from widget.sensor_information import SensorInformation
 import json, struct, threading
 
 
