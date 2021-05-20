@@ -4,7 +4,7 @@ import time, os
 
 
 class SensorInformation:
-    def __init__(self):
+    def __init__(self, sense):
         self.sense = SenseHat()
         self.sense.clear()
         self.sense.set_imu_config(False, True, True)
