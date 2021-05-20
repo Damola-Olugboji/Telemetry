@@ -45,8 +45,7 @@ class Main:
 
 
 def testprint():
-    sense = SenseHat()
-    sensor = SensorInformation(sense)
+    sensor = SensorInformation()
     while True:
         sensor_dict = sensor.sensorAggregate()
         print(json.dumps(sensor_dict))

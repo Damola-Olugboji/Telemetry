@@ -1,11 +1,13 @@
 from gps import *
 import time, os
+from sense_hat import SenseHat
 
 
 class SensorInformation:
-    def __init__(self, sense):
-        self.sense = sense
-        self.sense.clear()
+    self.sense = SenseHat()
+
+    def __init__(self):
+
         self.sense.set_imu_config(False, True, True)
         self.green = [0, 255, 0]
         self.red = [255, 0, 0]
