@@ -1,5 +1,5 @@
 import json, struct, threading
-from widget.sensor_information import SensorInformation
+from sensor_information import SensorInformation
 
 
 class Main:
