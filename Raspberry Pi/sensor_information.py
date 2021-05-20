@@ -5,8 +5,6 @@ import threading
 from time import *
 
 
-
-
 class GpsPoller(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
@@ -20,7 +18,10 @@ class GpsPoller(threading.Thread):
         while gpsp.running:
             gpsd.next()
 
-global gpsp = GpsPoller()
+
+global gpsp
+gpsp = GpsPoller()
+
 
 class SensorInformation:
     def __init__(self):
