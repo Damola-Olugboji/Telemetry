@@ -13,7 +13,7 @@ class SensorInformation:
         self.gpsp.start()
 
     def sensorAggregate(self):
-        time = gpsd.utc,' + ', gpsd.fix.time
+        time = gpsd.utc, " + ", gpsd.fix.time
         sensorDict = {
             "humidity": self.sense.get_humidity(),
             "temperature": self.sense.get_temperature(),
@@ -45,16 +45,16 @@ class SensorInformation:
     def matrixOff(self):
         self.sense.clear()
 
+
 class GpsPoller(threading.Thread):
-    def__init__(self):
-    threading.Thread.__init__(self)
-    global gpsd
-    gps = gps(mode = WATCH_ENABLE)
-    self.current_value = None
-    self.running = True
+    def __init__(self):
+        threading.Thread.__init__(self)
+        global gpsd
+        gps = gps(mode=WATCH_ENABLE)
+        self.current_value = None
+        self.running = True
 
     def run(self):
         global gpsd
         while gpsp.running:
             gpsd.next()
-
