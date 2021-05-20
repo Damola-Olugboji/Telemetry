@@ -1,7 +1,11 @@
 import time, os
 from sense_hat import SenseHat
 from gps import *
+import threading
+from time import *
 
+global gpsp
+gpsp = GpsPoller()
 
 class SensorInformation:
     def __init__(self):
@@ -9,11 +13,10 @@ class SensorInformation:
         self.sense.set_imu_config(False, True, True)
         self.green = [0, 255, 0]
         self.red = [255, 0, 0]
-        self.gpsp = GpsPoller()
-        self.gpsp.start()
+        gpsp.start()
 
     def sensorAggregate(self):
-        time = gpsd.utc,' + ', gpsd.fix.time
+        time = self.gpsd.utc,' + ', self.gpsd.fix.time
         sensorDict = {
             "humidity": self.sense.get_humidity(),
             "temperature": self.sense.get_temperature(),
@@ -46,12 +49,12 @@ class SensorInformation:
         self.sense.clear()
 
 class GpsPoller(threading.Thread):
-    def__init__(self):
-    threading.Thread.__init__(self)
-    global gpsd
-    gps = gps(mode = WATCH_ENABLE)
-    self.current_value = None
-    self.running = True
+    def __init__(self):
+    	threading.Thread.__init__(self)
+    	global gpsd
+    	gpsd = gps(mode = WATCH_ENABLE)
+    	self.current_value = None
+    	self.running = True
 
     def run(self):
         global gpsd
