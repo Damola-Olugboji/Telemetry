@@ -1,5 +1,6 @@
 import json, struct, threading
 from sensor_information import SensorInformation
+from sense_hat import SenseHat
 
 
 class Main:
@@ -44,7 +45,8 @@ class Main:
 
 
 def testprint():
-    sensor = SensorInformation()
+    sense = SenseHat()
+    sensor = SensorInformation(sense)
     while True:
         sensor_dict = sensor.sensorAggregate()
         print(json.dumps(sensor_dict))
