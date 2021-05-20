@@ -12,7 +12,6 @@ class SensorInformation:
         self.gpsp = GpsPoller()
         self.gpsp.start()
 
-    @classmethod
     def sensorAggregate(self):
         time = gpsd.utc,' + ', gpsd.fix.time
         sensorDict = {
