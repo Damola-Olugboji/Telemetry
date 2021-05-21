@@ -51,15 +51,18 @@ class SensorInformation:
 
         return sensorDict
 
-    @classmethod
     def matrixRed(self):
         mat = [red] * 64
         self.sense.set_pixels(mat)
 
-    @classmethod
     def matrixGreen(self):
         mat = [green] * 64
         self.sense.set_pixels(mat)
 
     def matrixOff(self):
         self.sense.clear()
+
+    def killThread(self):
+        gpsp.running = False
+        gpsp.join()
+        print("Thread Killed")

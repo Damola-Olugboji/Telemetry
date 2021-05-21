@@ -46,11 +46,13 @@ class Main:
 
 def testprint():
     sensor = SensorInformation()
-    while True:
-        sensor_dict = sensor.sensorAggregate()
-        print(json.dumps(sensor_dict))
-        time.sleep(0.1)
-
+    try:
+        while True:
+            sensor_dict = sensor.sensorAggregate()
+            print(json.dumps(sensor_dict))
+            time.sleep(0.1)
+    except (KeyboardInterrupt)
+        sensor.killThread()
 
 if __name__ == "__main__":
     testprint()
