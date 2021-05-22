@@ -1,6 +1,7 @@
 import json, struct, threading
 from sensor_information import SensorInformation
 import time
+import pandas as pd
 
 
 class Main:
@@ -30,8 +31,12 @@ class Main:
         return True
 
     def sendInformation(self):
+        #templist = ["humidity","temperature", "pressure", "acceleration", "accelRaw", "orientation", "latitude", "longitude", "time", "altitude", "epv", "ept", "speed"]
+        global df
+        df = pd.DataFrame()
         while True:
             sensor_dict = self.sensor.sensorAggregate()
+            
             struct = struct.pack(
                 "ffff",
                 sensor_dict["longitude"],
@@ -40,8 +45,9 @@ class Main:
                 sensor_dict["time"],
             )
             # will send only positional data for now
-            with open("sensor_information.txt", "w") as f:
-                f.write(json.dumps(sensor_dict))
+            df = df.append(sensor_dict, ignore_index = True)
+            
+        
 
 
 def testprint():
@@ -51,8 +57,11 @@ def testprint():
             sensor_dict = sensor.sensorAggregate()
             print(json.dumps(sensor_dict))
             time.sleep(0.1)
-    except (KeyboardInterrupt)
+    except (KeyboardInterrupt):
         sensor.killThread()
 
 if __name__ == "__main__":
-    testprint()
+    try:
+        testprint()
+    except:
+        df.to_csv('sensor_information') 
