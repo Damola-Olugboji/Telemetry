@@ -11,7 +11,7 @@ class RealtimeSensorGraph(tk.Frame):
         tk.Frame.__init__(self, parent)
         
         f = Figure(figsize = (1,1), dpi = 100)
-        a = f.add_subplot(111)
+        a = f.add_subplot(211)
 
         canvas = FigureCanvasTkAgg(f, self)
         canvas.draw()
