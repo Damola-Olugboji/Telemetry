@@ -2,7 +2,7 @@ import time, os
 from sense_hat import SenseHat
 from gps import *
 import threading
-from time import *
+from datetime import datetime
 
 
 class GpsPoller(threading.Thread):
@@ -32,8 +32,10 @@ class SensorInformation:
         gpsp.start()
 
     def sensorAggregate(self):
-        time = gpsd.utc, " + ", gpsd.fix.time
+        now = datetime.now()
+        time = now.strftime("%H:%M:%S")
         sensorDict = {
+            "time": time,
             "humidity": self.sense.get_humidity(),
             "temperature": self.sense.get_temperature(),
             "pressure": self.sense.get_pressure(),
@@ -42,7 +44,6 @@ class SensorInformation:
             "Orientation": self.sense.get_orientation_degrees(),
             "latitude": gpsd.fix.latitude,
             "longitude": gpsd.fix.longitude,
-            "time": time,
             "altitude": gpsd.fix.altitude,
             "epv": gpsd.fix.epv,
             "ept": gpsd.fix.ept,
