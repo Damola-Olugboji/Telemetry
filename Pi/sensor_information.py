@@ -49,6 +49,15 @@ class SensorInformation:
 
         return sensorDict
 
+    @staticmethod
+    def sensor_byte(self):
+        now = datetime.now()
+        time = now.strftime("%H:%M:%S")
+        output_string = "lat:{0} | lon:{1} | alt:{2} | time:{3} |".format(
+            gpsd.fix.latitude, gpsd.fix.longitude, gpsd.fix.altitude, time
+        )
+        return bytes(output_string, "utf-8")
+
     def matrixRed(self):
         mat = [red] * 64
         self.sense.set_pixels(mat)

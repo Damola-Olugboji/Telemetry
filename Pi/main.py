@@ -25,7 +25,7 @@ class Main:
         cameraThread = threading.Thread(target=self.camera.file_record())
 
         # send information class
-        radioThread = threading.Thread(target=self.sendInformation())
+        radioThread = threading.Thread(target=self.saveInformation())
 
         radioThread.start()
         # cameraThread.start()
@@ -34,7 +34,7 @@ class Main:
 
         return True
 
-    def sendInformation(self):
+    def saveInformation(self):
         # templist = ["humidity","temperature", "pressure", "acceleration", "accelRaw", "orientation", "latitude", "longitude", "time", "altitude", "epv", "ept", "speed"]
         now = datatime.now()
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
@@ -43,7 +43,7 @@ class Main:
                 sensor_dict = self.sensor.sensorAggregate()
                 sensor_values = list(sensor_dict.values())
                 # will send only positional data for now
-                struct = struct.pack(
+                struct = struct.pack(d
                     "ffff",
                     sensor_dict["longitude"],
                     sensor_dict["latitude"],
