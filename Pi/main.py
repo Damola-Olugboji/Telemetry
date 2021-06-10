@@ -24,11 +24,11 @@ class Main:
             flag = self.infoValidation(testInfo)
 
     def mainSequence(self):
-        cameraThread = threading.Thread(target=self.camera.file_record())
+        #cameraThread = threading.Thread(target=self.camera.file_record())
 
         # send information class
-        saveThread = threading.Thread(target=self.saveInformation())
-        radioThread = threading.Thread(target=self.sendInformation())
+        saveThread = threading.Thread(target=self.saveInformation)
+        radioThread = threading.Thread(target=self.sendInformation)
         saveThread.start()
         radioThread.start()
         # cameraThread.start()
@@ -40,16 +40,17 @@ class Main:
     def saveInformation(self):
         print("starting saveInformation")
         # templist = ["humidity","temperature", "pressure", "acceleration", "accelRaw", "orientation", "latitude", "longitude", "time", "altitude", "epv", "ept", "speed"]
-        now = datatime.now()
+        now = datetime.now()
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
         while True:
-            filename = open(dt_string + "sensor_information", "w")
+            filename = open("sensor_information.txt", "a+")
 
             sensor_dict = self.sensor.sensorAggregate()
             sensor_values = list(sensor_dict.values())
             # will send only positional data for now
             filename.write(str(sensor_values) + "\n")
+            
 
     def sendInformation(self):
         print("starting saveInformation")
@@ -73,6 +74,7 @@ def testprint():
 
 if __name__ == "__main__":
     try:
-        testprint()
+        main = Main()
     except KeyboardInterrupt:
-        pass
+        import sys
+        sys.exit()
