@@ -52,7 +52,7 @@ class Main:
             filename.write(str(sensor_values) + "\n")
 
     def sendInformation(self):
-        print("starting sendInformation")
+        print("starting saveInformation")
         save_path = "/media/pi/CITCUITPY"
         filename = "sensor.bin"
         complete = os.path.join(save_path, filename)
@@ -75,6 +75,6 @@ def testprint():
 
 if __name__ == "__main__":
     try:
-        main = Main()
-    except:
+        testprint()
+    except KeyboardInterrupt:
         pass
