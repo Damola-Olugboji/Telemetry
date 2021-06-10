@@ -38,18 +38,21 @@ class Main:
         return True
 
     def saveInformation(self):
+        print("starting saveInformation")
         # templist = ["humidity","temperature", "pressure", "acceleration", "accelRaw", "orientation", "latitude", "longitude", "time", "altitude", "epv", "ept", "speed"]
         now = datatime.now()
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-        with open(dt_string + "_sensor_information.csv", "a", newline="") as f:
-            while True:
-                sensor_dict = self.sensor.sensorAggregate()
-                sensor_values = list(sensor_dict.values())
-                # will send only positional data for now
-                wr = csv.writer(f, dialect="excel")
-                wr.writerow(sensor_values)
+
+        while True:
+            filename = open(dt_string + "sensor_information", "w")
+
+            sensor_dict = self.sensor.sensorAggregate()
+            sensor_values = list(sensor_dict.values())
+            # will send only positional data for now
+            filename.write(str(sensor_values) + "\n")
 
     def sendInformation(self):
+        print("starting sendInformation")
         save_path = "/media/pi/CITCUITPY"
         filename = "sensor"
         while True:
