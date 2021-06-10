@@ -38,6 +38,7 @@ class Main:
         return True
 
     def saveInformation(self):
+        print("starting saveInformation")
         # templist = ["humidity","temperature", "pressure", "acceleration", "accelRaw", "orientation", "latitude", "longitude", "time", "altitude", "epv", "ept", "speed"]
         now = datatime.now()
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
@@ -50,6 +51,7 @@ class Main:
                 wr.writerow(sensor_values)
 
     def sendInformation(self):
+        print("starting saveInformation")
         save_path = "/media/pi/CITCUITPY"
         filename = "sensor"
         while True:
@@ -70,6 +72,6 @@ def testprint():
 
 if __name__ == "__main__":
     try:
-        main = Main()
-    except:
+        testprint()
+    except KeyboardInterrupt:
         pass
