@@ -54,7 +54,9 @@ class Main:
     def sendInformation(self):
         print("starting sendInformation")
         save_path = "/media/pi/CITCUITPY"
-        filename = "sensor"
+        filename = "sensor.bin"
+        complete = os.path.join(save_path, filename)
+        file1 = open(complete, "w")
         while True:
             file1.write(self.sensor.sensor_byte())
             time.sleep(1)
