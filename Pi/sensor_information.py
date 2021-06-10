@@ -53,7 +53,7 @@ class SensorInformation:
     def sensor_byte(self):
         now = datetime.now()
         time = now.strftime("%H:%M:%S")
-        output_string = "lat:{0} | lon:{1} | alt:{2} | time:{3} |".format(
+        output_string = "lat:{0} | lon:{1} | alt:{2} | time:{3} | \n".format(
             gpsd.fix.latitude, gpsd.fix.longitude, gpsd.fix.altitude, time
         )
         return bytes(output_string, "utf-8")

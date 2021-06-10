@@ -4,6 +4,8 @@ import time
 import csv
 from datetime import datetime
 import pprint
+import sys
+import os.path
 
 
 class Main:
@@ -25,8 +27,9 @@ class Main:
         cameraThread = threading.Thread(target=self.camera.file_record())
 
         # send information class
-        radioThread = threading.Thread(target=self.saveInformation())
-
+        saveThread = threading.Thread(target=self.saveInformation())
+        radioThread = threading.Thread(target=self.sendInformation())
+        saveThread.start()
         radioThread.start()
         # cameraThread.start()
 
@@ -43,16 +46,15 @@ class Main:
                 sensor_dict = self.sensor.sensorAggregate()
                 sensor_values = list(sensor_dict.values())
                 # will send only positional data for now
-                struct = struct.pack(d
-                    "ffff",
-                    sensor_dict["longitude"],
-                    sensor_dict["latitude"],
-                    sensor_dict["altitude"],
-                    sensor_dict["time"],
-                )
-
                 wr = csv.writer(f, dialect="excel")
                 wr.writerow(sensor_values)
+
+    def sendInformation(self):
+        save_path = "/media/pi/CITCUITPY"
+        filename = "sensor"
+        while True:
+            file1.write(self.sensor.sensor_byte())
+            time.sleep(1)
 
 
 def testprint():
@@ -68,6 +70,6 @@ def testprint():
 
 if __name__ == "__main__":
     try:
-        testprint()
+        main = Main()
     except:
         pass
