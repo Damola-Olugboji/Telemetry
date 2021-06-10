@@ -24,7 +24,7 @@ while True:
         packet_text = str(packet, "ascii")
         print("{0}".format(packet_text))
 
-
+"""
 def sensor_data():
     while True:
         packet = rfm9x.receive()
@@ -33,4 +33,4 @@ def sensor_data():
         else:
             LED.value = True
             packet_text = str(packet, "ascii")
-            return packet_text
+            return packet_text"""
