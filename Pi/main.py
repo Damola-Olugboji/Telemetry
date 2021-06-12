@@ -57,7 +57,7 @@ class Main:
         save_path = "/media/pi/CITCUITPY"
         filename = "sensor.bin"
         complete = os.path.join(save_path, filename)
-        file1 = open(complete, "w")
+        file1 = open(complete, "rb+")
         while True:
             file1.write(self.sensor.sensor_byte())
             time.sleep(1)
