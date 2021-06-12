@@ -4,6 +4,8 @@ import time
 import csv
 from datetime import datetime
 import pprint
+import sys
+import os.path
 
 
 class Main:
@@ -22,11 +24,12 @@ class Main:
             flag = self.infoValidation(testInfo)
 
     def mainSequence(self):
-        cameraThread = threading.Thread(target=self.camera.file_record())
+        #cameraThread = threading.Thread(target=self.camera.file_record())
 
         # send information class
-        radioThread = threading.Thread(target=self.saveInformation())
-
+        saveThread = threading.Thread(target=self.saveInformation)
+        radioThread = threading.Thread(target=self.sendInformation)
+        saveThread.start()
         radioThread.start()
         # cameraThread.start()
 
@@ -35,24 +38,29 @@ class Main:
         return True
 
     def saveInformation(self):
+        print("starting saveInformation")
         # templist = ["humidity","temperature", "pressure", "acceleration", "accelRaw", "orientation", "latitude", "longitude", "time", "altitude", "epv", "ept", "speed"]
-        now = datatime.now()
+        now = datetime.now()
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-        with open(dt_string + "_sensor_information.csv", "a", newline="") as f:
-            while True:
-                sensor_dict = self.sensor.sensorAggregate()
-                sensor_values = list(sensor_dict.values())
-                # will send only positional data for now
-                struct = struct.pack(d
-                    "ffff",
-                    sensor_dict["longitude"],
-                    sensor_dict["latitude"],
-                    sensor_dict["altitude"],
-                    sensor_dict["time"],
-                )
 
-                wr = csv.writer(f, dialect="excel")
-                wr.writerow(sensor_values)
+        while True:
+            filename = open("sensor_information.txt", "a+")
+
+            sensor_dict = self.sensor.sensorAggregate()
+            sensor_values = list(sensor_dict.values())
+            # will send only positional data for now
+            filename.write(str(sensor_values) + "\n")
+            
+
+    def sendInformation(self):
+        print("starting saveInformation")
+        save_path = "/media/pi/CITCUITPY"
+        filename = "sensor.bin"
+        complete = os.path.join(save_path, filename)
+        file1 = open(complete, "w")
+        while True:
+            file1.write(self.sensor.sensor_byte())
+            time.sleep(1)
 
 
 def testprint():
@@ -68,6 +76,7 @@ def testprint():
 
 if __name__ == "__main__":
     try:
-        testprint()
-    except:
-        pass
+        main = Main()
+    except KeyboardInterrupt:
+        import sys
+        sys.exit()
