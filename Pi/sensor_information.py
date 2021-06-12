@@ -25,8 +25,8 @@ gpsp = GpsPoller()
 
 class SensorInformation:
     def __init__(self):
-        self.sense = SenseHat()
-        self.sense.set_imu_config(False, True, True)
+        #self.sense = SenseHat()
+        #self.sense.set_imu_config(False, True, True)
         self.green = [0, 255, 0]
         self.red = [255, 0, 0]
         gpsp.start()
@@ -36,9 +36,9 @@ class SensorInformation:
         time = now.strftime("%H:%M:%S")
         sensorDict = {
             "time": time,
-            "humidity": self.sense.get_humidity(),
-            "temperature": self.sense.get_temperature(),
-            "pressure": self.sense.get_pressure(),
+            #"humidity": self.sense.get_humidity(),
+            #"temperature": self.sense.get_temperature(),
+            #"pressure": self.sense.get_pressure(),
             "latitude": gpsd.fix.latitude,
             "longitude": gpsd.fix.longitude,
             "altitude": gpsd.fix.altitude,
@@ -57,7 +57,7 @@ class SensorInformation:
             gpsd.fix.latitude, gpsd.fix.longitude, gpsd.fix.altitude, time
         )
         return bytes(output_string, "utf-8")
-
+"""
     def matrixRed(self):
         mat = [red] * 64
         self.sense.set_pixels(mat)
@@ -68,7 +68,7 @@ class SensorInformation:
 
     def matrixOff(self):
         self.sense.clear()
-
+"""
     def killThread(self):
         gpsp.running = False
         gpsp.join()
